@@ -1,8 +1,8 @@
 # Gravity Ball
-Try it in itch.io: https://yuriy-danyliuk.itch.io/gravity-ball
+Try it on [itch.io](https://yuriy-danyliuk.itch.io/gravity-ball) and have fun!
 
-![Gravity Ball cover alt](https://drive.google.com/uc?export=view&id=1fG6ekFU7ZjN7uETEa5Di8w4gE6Zb8Xot "Gravity Ball cover")
-#
-Made accordingly to this assignment
+![Cover](https://user-images.githubusercontent.com/56362999/153203170-97d48a21-390b-462b-bc25-1e9fe38eac2c.png)
 
-![Test image alt](https://drive.google.com/uc?export=view&id=1bxW0XZTychD08fq9zcsRTxPkBnP37hoK "Junior Unity Developer test")
+Made accordingly to this assignment:
+
+![Junior unity developer test](https://user-images.githubusercontent.com/56362999/153203044-cd0430e0-5ff8-4b22-8381-481d3e7b0923.png)
