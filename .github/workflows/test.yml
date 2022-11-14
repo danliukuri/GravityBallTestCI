@@ -23,6 +23,22 @@ jobs:
         with:
           lfs: true
 
+      - name: Create LFS file list
+        run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
+
+      - name: Restore LFS cache
+        uses: actions/cache@v2
+        id: lfs-cache
+        with:
+          path: .git/lfs
+          key: ${{ runner.os }}-lfs-${{ hashFiles('.lfs-assets-id') }}
+
+      - name: Git LFS Pull
+        run: |
+          git lfs pull
+          git add .
+          git reset --hard
+
       - name: Restore Library cache
         uses: actions/cache@v2
         with:
@@ -32,7 +48,7 @@ jobs:
             Library-
 
       - name: Test
-        uses: game-ci/unity-test-runner@v2
+        uses: game-ci/unity-test-runner@v2.1.0
         id: tests
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
