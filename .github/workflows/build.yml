@@ -8,7 +8,7 @@ on:
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
-jobs:
+jobs: 
   buildAllTargetPlatforms:
     name: Build for ${{ matrix.targetPlatform }}
     runs-on: ubuntu-latest
