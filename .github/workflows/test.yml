@@ -44,6 +44,9 @@ jobs:
         with:
           path: ${{ matrix.projectPath }}/Library
           key: Library-Test
+          restore-keys: |
+            Library-Build-
+            Library-
 
       - name: Test
         uses: game-ci/unity-test-runner@v2.1.0
