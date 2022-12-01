@@ -8,5 +8,3 @@ Try it, share your feedback and best scores in the comments on [itch.io](https:/
 Made accordingly to this assignment:
 
 ![Junior unity developer test](https://user-images.githubusercontent.com/56362999/153203044-cd0430e0-5ff8-4b22-8381-481d3e7b0923.png)
-
-Some change))
