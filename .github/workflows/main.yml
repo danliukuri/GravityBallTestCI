@@ -1,0 +1,13 @@
+name: CI/CD run
+
+on: 
+  workflow_dispatch: {}
+  pull_request: {}
+
+jobs:
+  test:
+    uses: ./.github/workflows/test.yml
+  build:
+    uses: ./.github/workflows/build.yml
+  deploy:
+    uses: ./.github/workflows/deploy.yml
