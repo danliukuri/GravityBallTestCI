@@ -1,6 +1,6 @@
 name: Build
 
-on: [workflow_dispatch, workflow_call]
+on: workflow_call
 
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
