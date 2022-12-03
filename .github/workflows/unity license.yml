@@ -3,12 +3,15 @@ name: Get Unity license activation file
 on:
   workflow_dispatch: {}
 
+outputs:
+  link:
+    description: "The link to activate license"
+    value: ${{ jobs.getManualUnityLicenseActivationFile.steps.linkToActivate.outputs.linkToActivate }}
+
 jobs:
   getManualUnityLicenseActivationFile:
     name: Get manual Unity license activation file
     runs-on: ubuntu-latest
-    outputs:
-      link: ${{ steps.linkToActivate.outputs }}
 
     steps:
       - name: Request manual activation file
@@ -23,4 +26,4 @@ jobs:
 
       - name: Get link to activate
         id: linkToActivate
-        run: echo https://license.unity3d.com/manual
+        run: echo "linkToActivate=https://license.unity3d.com/manual"
