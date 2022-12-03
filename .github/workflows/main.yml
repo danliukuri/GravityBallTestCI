@@ -1,13 +1,16 @@
-name: CI/CD run
+name: Test / Build / Deploy
 
-on: 
-  workflow_dispatch: {}
-  pull_request: {}
+on: [workflow_dispatch, pull_request]
 
 jobs:
   test:
+    name: Test
     uses: ./.github/workflows/test.yml
   build:
+    name: Build
+    needs: test
     uses: ./.github/workflows/build.yml
   deploy:
+    name: Deploy
+    needs: build
     uses: ./.github/workflows/deploy.yml

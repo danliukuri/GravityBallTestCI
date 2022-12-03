@@ -1,4 +1,4 @@
-name: Build For Target Platforms
+name: Build
 
 on: [workflow_dispatch, workflow_call]
 
@@ -19,6 +19,7 @@ jobs:
           - Android
           - StandaloneWindows64
           - WebGL
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -38,13 +39,13 @@ jobs:
             ${{ runner.os }}-Lfs-
             ${{ runner.os }}-
 
-      - name: Git LFS Pull
+      - name: Git LFS pull
         run: |
           git lfs pull
           git add .
           git reset --hard
 
-      - name: Restore Library cache
+      - name: Restore library cache
         uses: actions/cache@v3
         with:
           path: Library

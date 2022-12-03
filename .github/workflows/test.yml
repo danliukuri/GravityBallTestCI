@@ -14,6 +14,7 @@ jobs:
         testMode:
           - playmode
           - editmode
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -30,13 +31,13 @@ jobs:
           path: .git/lfs
           key: ${{ runner.os }}-Lfs-${{ hashFiles('.lfs-assets-id') }}
 
-      - name: Git LFS Pull
+      - name: Git LFS pull
         run: |
           git lfs pull
           git add .
           git reset --hard
 
-      - name: Restore Library cache
+      - name: Restore library cache
         uses: actions/cache@v3
         with:
           path: ${{ matrix.projectPath }}/Library
