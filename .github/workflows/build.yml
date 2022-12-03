@@ -1,9 +1,6 @@
 name: Build For Target Platforms
 
-on: 
-  workflow_dispatch: {}
-  pull_request: {}
-  push: { branches: [master, develop], tags: ['*'] }
+on: [workflow_dispatch, workflow_call]
 
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
@@ -19,12 +16,9 @@ jobs:
           - GravityBall
         # Names as specified in Unity - https://docs.unity3d.com/ScriptReference/BuildTarget.html
         targetPlatform:
-          - StandaloneWindows
-          - iOS
           - Android
           - StandaloneWindows64
           - WebGL
-          - StandaloneLinux64
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
