@@ -12,8 +12,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        projectName:
-          - GravityBall
         # Names as specified in Unity - https://docs.unity3d.com/ScriptReference/BuildTarget.html
         targetPlatform:
           - Android
@@ -59,11 +57,11 @@ jobs:
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          buildName: ${{ matrix.projectName }}
+          buildName: ${{ env.PROJECT_NAME }}
           targetPlatform: ${{ matrix.targetPlatform }}
 
       - name: Upload build
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ matrix.projectName }}${{ matrix.targetPlatform }} 
+          name: ${{ env.PROJECT_NAME }}${{ matrix.targetPlatform }} 
           path: build/${{ matrix.targetPlatform }}

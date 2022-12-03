@@ -4,13 +4,9 @@ on:
   workflow_dispatch: {}
 
 jobs:
-  getManualUnityLicenseActivationFile:
+  get-unity-license-activation-file:
     name: Get manual Unity license activation file
     runs-on: ubuntu-latest
-    environment:
-      name: link-to-activate
-      url: ${{ steps.linkToActivate.outputs.linkToActivate }}
-
     steps:
       - name: Request manual activation file
         id: getManualLicenseFile
@@ -23,5 +19,4 @@ jobs:
           path: ${{ steps.getManualLicenseFile.outputs.filePath }}
 
       - name: Get link to activate
-        id: linkToActivate
-        run: echo "linkToActivate=https://license.unity3d.com/manual"
+        run: echo "link-to-activate=$(https://license.unity3d.com/manual)\n" >> $GITHUB_OUTPUT

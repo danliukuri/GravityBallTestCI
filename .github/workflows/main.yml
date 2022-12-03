@@ -2,6 +2,10 @@ name: Unity
 
 on: [workflow_dispatch, pull_request]
 
+env:
+  PROJECT_NAME: GravityBall
+  PROJECT_PATH: ./
+
 jobs:
   test:
     name: Test

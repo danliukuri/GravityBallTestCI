@@ -4,15 +4,8 @@ on: [workflow_dispatch, workflow_call]
 
 jobs:
   deploy-github-pages:
-    name: Deploy to Github Pages
+    name: Github Pages
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        projectName:
-          - GravityBall
-        targetPlatform:
-          - WebGL
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -30,7 +23,7 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v1
         with:
-          path: build/${{ matrix.targetPlatform }}/${{ matrix.projectName }}
+          path: build/WebGL/${{ env.PROJECT_NAME }}
 
       - name: Deploy Pages
         id: deployment
