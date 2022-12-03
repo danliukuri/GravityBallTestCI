@@ -1,12 +1,9 @@
 name: Deploy
 
-on: 
-  workflow_dispatch: {}
-  workflow_call: 
-    secrets: inherit
+on: [workflow_dispatch, workflow_call]
 
 jobs:
-  deployToGithubPages:
+  deploy-github-pages:
     name: Deploy to Github Pages
     runs-on: ubuntu-latest
     strategy:
@@ -23,7 +20,6 @@ jobs:
       pages: write
       id-token: write
 
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3

@@ -1,13 +1,13 @@
 name: Build
 
-on: 
-  workflow_dispatch: {}
-  workflow_call: 
-    secrets: inherit
+on: [workflow_dispatch, workflow_call]
+
+env:
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
 jobs:
-  buildAllTargetPlatforms:
-    name: Build for ${{ matrix.targetPlatform }}
+  build-all-target-platforms:
+    name: ${{ matrix.targetPlatform }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
