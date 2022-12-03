@@ -31,13 +31,14 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v2.1.2
 
-      # - name: Download artifact
-      #   uses: dawidd6/action-download-artifact@v2.24.2
-      #   with:
-      #     workflow: build.yml
-      #     name: ${{ matrix.projectName }}${{ matrix.targetPlatform }}
-      #     path: build/${{ matrix.targetPlatform }}
-      #     search_artifacts: true
+      - name: Download artifact
+        uses: dawidd6/action-download-artifact@v2.24.2
+        with:
+          workflow: build.yml
+          commit: ${{github.event.pull_request.head.sha}}
+          name: ${{ matrix.projectName }}${{ matrix.targetPlatform }}
+          path: build/${{ matrix.targetPlatform }}
+          search_artifacts: true
 
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v1
