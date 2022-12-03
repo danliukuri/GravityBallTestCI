@@ -7,6 +7,7 @@ jobs:
   get-unity-license-activation-file:
     name: Get manual Unity license activation file
     runs-on: ubuntu-latest
+
     steps:
       - name: Request manual activation file
         id: getManualLicenseFile
@@ -19,4 +20,10 @@ jobs:
           path: ${{ steps.getManualLicenseFile.outputs.filePath }}
 
       - name: Get link to activate
-        run: echo "link-to-activate=$(https://license.unity3d.com/manual)\n" >> $GITHUB_OUTPUT
+        id: get-link
+        run: echo "link-to-activate=$(https://license.unity3d.com/manual)" >> $GITHUB_OUTPUT
+
+  outputs:
+    random-number:
+      description: "Random number"
+      value: ${{ steps.get-link.outputs.link-to-activate }}
