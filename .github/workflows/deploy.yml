@@ -37,6 +37,7 @@ jobs:
           workflow: build.yml
           name: ${{ matrix.projectName }}${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
+          search_artifacts: true
 
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v1
