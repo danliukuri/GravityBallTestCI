@@ -1,9 +1,9 @@
 name: Build
 
-on: [workflow_dispatch, workflow_call]
-
-env:
-  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+on: 
+  workflow_dispatch: {}
+  workflow_call: 
+    secrets: inherit
 
 jobs:
   buildAllTargetPlatforms:

@@ -2,21 +2,18 @@ name: Unity
 
 on: [workflow_dispatch, pull_request]
 
+env:
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+
 jobs:
   test:
     name: Test
     uses: ./.github/workflows/test.yml
-    secrets:
-      UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
   build:
     name: Build
     needs: test
     uses: ./.github/workflows/build.yml
-    secrets:
-      UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
   deploy:
     name: Deploy
     needs: build
     uses: ./.github/workflows/deploy.yml
-    secrets:
-      UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
