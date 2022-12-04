@@ -2,17 +2,13 @@ name: Unity
 
 on: [workflow_dispatch, pull_request]
 
-env:
-  projectName: GravityBall
-  projectPath: ./
-
 jobs:
   test:
     name: Test
     uses: ./.github/workflows/test.yml
     secrets: inherit
     with:
-      projectPath: ${{ env.projectPath }}
+      projectPath: "./"
   build:
     name: Build
     needs: test
