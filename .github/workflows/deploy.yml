@@ -33,13 +33,11 @@ jobs:
           path: build/${{ env.targetPlatform }}
 
       - name: Upload Artifacts
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v1
         with:
-          name: ${{ inputs.projectName }}${{ env.targetPlatform }}GithubPages
+          artifact_name: ${{ inputs.projectName }}${{ env.targetPlatform }}GithubPages
           path: build/${{ env.targetPlatform }}
 
       - name: Deploy Pages
         id: deployment
         uses: actions/deploy-pages@v1
-        with:
-          name: ${{ inputs.projectName }}${{ env.targetPlatform }}GithubPages

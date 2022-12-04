@@ -15,8 +15,7 @@ on:
 
 jobs:
   get-unity-license-activation-file:
-    name: Get manual activation file /
-      https://license.unity3d.com/manual
+    name: "Get manual activation file\nhttps://license.unity3d.com/manual"
     runs-on: ubuntu-latest
 
     steps:
