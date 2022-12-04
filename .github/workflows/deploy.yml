@@ -3,7 +3,7 @@ name: Deploy
 on: 
   workflow_call:
     inputs:
-      PROJECT_NAME:
+      projectName:
         required: true
         type: string
 
@@ -14,6 +14,8 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      targetPlatform: WebGL
     permissions:
       pages: write
       id-token: write
@@ -27,13 +29,13 @@ jobs:
 
       - uses: actions/download-artifact@v3
         with:
-          name: ${{ inputs.PROJECT_NAME }}WebGL
-          path: build/WebGL
+          name: ${{ inputs.projectName }}${{ env.targetPlatform }}
+          path: build/${{ env.targetPlatform }}
 
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v1
         with:
-          path: build/WebGL/${{ inputs.PROJECT_NAME }}
+          path: build/${{ env.targetPlatform }}/${{ inputs.projectName }}
 
       - name: Deploy Pages
         id: deployment

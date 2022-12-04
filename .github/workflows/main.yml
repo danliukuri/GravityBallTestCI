@@ -3,8 +3,8 @@ name: Unity
 on: [workflow_dispatch, pull_request]
 
 env:
-  PROJECT_NAME: GravityBall
-  PROJECT_PATH: ./
+  projectName: GravityBall
+  projectPath: ./
 
 jobs:
   test:
@@ -12,18 +12,18 @@ jobs:
     uses: ./.github/workflows/test.yml
     secrets: inherit
     with:
-      PROJECT_PATH: "./"
+      projectPath: ${{ env.projectPath }}
   build:
     name: Build
     needs: test
     uses: ./.github/workflows/build.yml
     secrets: inherit
     with:
-      PROJECT_NAME: "GravityBall"
+      projectName: "GravityBall"
   deploy:
     name: Deploy
     needs: build
     uses: ./.github/workflows/deploy.yml
     secrets: inherit
     with:
-      PROJECT_NAME: "GravityBall"
+      projectName: "GravityBall"

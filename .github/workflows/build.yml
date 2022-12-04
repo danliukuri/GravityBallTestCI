@@ -3,13 +3,9 @@ name: Build
 on: 
   workflow_call:
     inputs:
-      PROJECT_NAME:
+      projectName:
         required: true
         type: string
-
-
-env:
-  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
 jobs:
   build-all-target-platforms:
@@ -63,11 +59,11 @@ jobs:
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          buildName: ${{ inputs.PROJECT_NAME }}
+          buildName: ${{ inputs.projectName }}
           targetPlatform: ${{ matrix.targetPlatform }}
 
       - name: Upload build
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ inputs.PROJECT_NAME }}${{ matrix.targetPlatform }} 
+          name: ${{ inputs.projectName }}${{ matrix.targetPlatform }} 
           path: build/${{ matrix.targetPlatform }}

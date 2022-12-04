@@ -3,7 +3,7 @@ name: Test
 on: 
   workflow_call:
     inputs:
-      PROJECT_PATH:
+      projectPath:
         required: true
         type: string
 
@@ -43,7 +43,7 @@ jobs:
       - name: Restore library cache
         uses: actions/cache@v3
         with:
-          path: ${{ inputs.PROJECT_PATH }}/Library
+          path: ${{ inputs.projectPath }}/Library
           key: Library-Test
           restore-keys: |
             Library-Build-
@@ -55,7 +55,7 @@ jobs:
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          projectPath: ${{ inputs.PROJECT_PATH }}
+          projectPath: ${{ inputs.projectPath }}
           testMode: ${{ matrix.testMode }}
           artifactsPath: tests/${{ matrix.testMode }}/artifacts
           githubToken: ${{ secrets.GITHUB_TOKEN }}
