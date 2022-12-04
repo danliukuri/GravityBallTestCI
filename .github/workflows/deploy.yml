@@ -17,10 +17,10 @@ jobs:
     environment:
       name: ${{ inputs.projectName }}${{ env.targetPlatform }}GithubPages
       url: ${{ steps.deployment.outputs.page_url }}
-    
     permissions:
       pages: write
       id-token: write
+      
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
