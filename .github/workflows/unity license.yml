@@ -1,11 +1,11 @@
-name: Get Unity license activation file
+name: Unity License
 
 on:
   workflow_dispatch: {}
 
 jobs:
   get-unity-license-activation-file:
-    name: Get manual Unity license activation file
+    name: Get manual activation file
     runs-on: ubuntu-latest
 
     steps:

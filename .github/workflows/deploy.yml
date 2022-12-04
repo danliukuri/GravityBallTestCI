@@ -12,7 +12,7 @@ jobs:
     name: Github Pages
     runs-on: ubuntu-latest
     environment:
-      name: github-pages
+      name: ${{ inputs.projectName }}${{ env.targetPlatform }}GithubPages
       url: ${{ steps.deployment.outputs.page_url }}
     env:
       targetPlatform: WebGL

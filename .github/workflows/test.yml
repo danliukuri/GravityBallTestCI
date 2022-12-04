@@ -59,19 +59,19 @@ jobs:
           testMode: ${{ matrix.testMode }}
           artifactsPath: tests/${{ matrix.testMode }}/artifacts
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          checkName: ${{ matrix.testMode }} test results
-          coverageOptions: 'generateAdditionalMetrics;generateHtmlReport;generateBadgeReport;assemblyFilters:+my.assembly.*'
+          checkName: TestResults${{ matrix.testMode }}
+          coverageOptions: 'generateAdditionalMetrics;generateHtmlReport;generateBadgeReport;assemblyFilters:+game.assembly.*'
 
       - name: Upload test results
         uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: ${{ matrix.testMode }} test results
+          name: TestResults${{ matrix.testMode }} 
           path: ${{ steps.tests.outputs.artifactsPath }}
 
       - name: Upload coverage results
         uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: ${{ matrix.testMode }} coverage results
+          name: CoverageResults${{ matrix.testMode }} 
           path: ${{ steps.tests.outputs.coveragePath }}
