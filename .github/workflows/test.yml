@@ -1,22 +1,23 @@
 name: Test
 
 on: 
-  workflow_dispatch: {}
-  pull_request: {}
-  push: { branches: [master, develop] }
+  workflow_call:
+    inputs:
+      projectPath:
+        required: true
+        type: string
 
 jobs:
-  testAllModes:
-    name: Test in ${{ matrix.testMode }}
+  test-all-modes:
+    name: ${{ matrix.testMode }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        projectPath:
-          - ./
         testMode:
-          - playmode
-          - editmode
+          - Playmode
+          - Editmode
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -33,16 +34,16 @@ jobs:
           path: .git/lfs
           key: ${{ runner.os }}-Lfs-${{ hashFiles('.lfs-assets-id') }}
 
-      - name: Git LFS Pull
+      - name: Git LFS pull
         run: |
           git lfs pull
           git add .
           git reset --hard
 
-      - name: Restore Library cache
+      - name: Restore library cache
         uses: actions/cache@v3
         with:
-          path: ${{ matrix.projectPath }}/Library
+          path: ${{ inputs.projectPath }}/Library
           key: Library-Test
           restore-keys: |
             Library-Build-
@@ -54,23 +55,23 @@ jobs:
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          projectPath: ${{ matrix.projectPath }}
+          projectPath: ${{ inputs.projectPath }}
           testMode: ${{ matrix.testMode }}
           artifactsPath: tests/${{ matrix.testMode }}/artifacts
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          checkName: Test results for ${{ matrix.testMode }}
+          checkName: ${{ matrix.testMode }} test results
           coverageOptions: 'generateAdditionalMetrics;generateHtmlReport;generateBadgeReport;assemblyFilters:+my.assembly.*'
 
       - name: Upload test results
         uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: Test results for ${{ matrix.testMode }}
+          name: ${{ matrix.testMode }} test results
           path: ${{ steps.tests.outputs.artifactsPath }}
 
       - name: Upload coverage results
         uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: Coverage results for ${{ matrix.testMode }}
+          name: ${{ matrix.testMode }} coverage results
           path: ${{ steps.tests.outputs.coveragePath }}

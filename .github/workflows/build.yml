@@ -1,30 +1,25 @@
-name: Build For Target Platforms
+name: Build
 
 on: 
-  workflow_dispatch: {}
-  pull_request: {}
-  push: { branches: [master, develop], tags: ['*'] }
-
-env:
-  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+  workflow_call:
+    inputs:
+      projectName:
+        required: true
+        type: string
 
 jobs:
-  buildAllTargetPlatforms:
-    name: Build for ${{ matrix.targetPlatform }}
+  build-all-target-platforms:
+    name: ${{ matrix.targetPlatform }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        projectName:
-          - GravityBall
         # Names as specified in Unity - https://docs.unity3d.com/ScriptReference/BuildTarget.html
         targetPlatform:
-          - StandaloneWindows
-          - iOS
           - Android
           - StandaloneWindows64
           - WebGL
-          - StandaloneLinux64
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -44,13 +39,13 @@ jobs:
             ${{ runner.os }}-Lfs-
             ${{ runner.os }}-
 
-      - name: Git LFS Pull
+      - name: Git LFS pull
         run: |
           git lfs pull
           git add .
           git reset --hard
 
-      - name: Restore Library cache
+      - name: Restore library cache
         uses: actions/cache@v3
         with:
           path: Library
@@ -64,11 +59,11 @@ jobs:
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          buildName: ${{ matrix.projectName }}
+          buildName: ${{ inputs.projectName }}
           targetPlatform: ${{ matrix.targetPlatform }}
 
       - name: Upload build
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ matrix.projectName }}${{ matrix.targetPlatform }} 
+          name: ${{ inputs.projectName }}${{ matrix.targetPlatform }} 
           path: build/${{ matrix.targetPlatform }}

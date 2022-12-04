@@ -1,29 +1,25 @@
 name: Deploy
 
-on:
-  workflow_run:
-    workflows: [Build For Target Platforms]
-    types: [completed]
+on: 
+  workflow_call:
+    inputs:
+      projectName:
+        required: true
+        type: string
 
 jobs:
-  deployToGithubPages:
-    name: Deploy to Github Pages
+  deploy-github-pages:
+    name: Github Pages
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        projectName:
-          - GravityBall
-        targetPlatform:
-          - WebGL
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      targetPlatform: WebGL
     permissions:
       pages: write
       id-token: write
 
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -31,19 +27,15 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v2.1.2
 
-      - name: Download artifact
-        uses: dawidd6/action-download-artifact@v2.24.2
+      - uses: actions/download-artifact@v3
         with:
-          workflow: build.yml
-          commit: ${{github.event.pull_request.head.sha}}
-          name: ${{ matrix.projectName }}${{ matrix.targetPlatform }}
-          path: build/${{ matrix.targetPlatform }}
-          search_artifacts: true
+          name: ${{ inputs.projectName }}${{ env.targetPlatform }}
+          path: build/${{ env.targetPlatform }}
 
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v1
         with:
-          path: build/${{ matrix.targetPlatform }}/${{ matrix.projectName }}
+          path: build/${{ env.targetPlatform }}/${{ inputs.projectName }}
 
       - name: Deploy Pages
         id: deployment

@@ -4,9 +4,10 @@ on:
   workflow_dispatch: {}
 
 jobs:
-  activation:
+  get-unity-license-activation-file:
     name: Get manual Unity license activation file
     runs-on: ubuntu-latest
+
     steps:
       - name: Request manual activation file
         id: getManualLicenseFile
@@ -15,5 +16,9 @@ jobs:
       - name: Upload artifact (Unity_v20X...X.alf)
         uses: actions/upload-artifact@v2
         with:
-          name: Manual Unity license activation file
+          name: ManualUnityLicenseActivationFile
           path: ${{ steps.getManualLicenseFile.outputs.filePath }}
+
+      - name: Echo link to activate
+        id: echo-link
+        run: echo "link-to-activate=$(https://license.unity3d.com/manual)" >> $GITHUB_OUTPUT
