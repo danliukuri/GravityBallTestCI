@@ -17,7 +17,10 @@ jobs:
   get-unity-license-activation-file:
     name: Get manual activation file
     runs-on: ubuntu-latest
-
+    environment:
+      name: Link to activate Unity license
+      url: https://license.unity3d.com/manual
+    
     steps:
       - name: Request manual activation file
         id: getManualLicenseFile
@@ -28,12 +31,4 @@ jobs:
         with:
           name: ManualUnityLicenseActivationFile
           path: ${{ steps.getManualLicenseFile.outputs.filePath }}
-
-  echo-link-to-activate:
-    name: https://license.unity3d.com/manual
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Echo link to activate
-        run: echo "https://license.unity3d.com/manual" >> $GITHUB_OUTPUT
 
