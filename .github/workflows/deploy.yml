@@ -12,7 +12,7 @@ jobs:
     name: Github Pages
     runs-on: ubuntu-latest
     environment:
-      name: ${{ inputs.projectName }}WebGLGithubPages
+      name: Develop
       url: ${{ steps.deployment.outputs.page_url }}
     env:
       targetPlatform: WebGL
@@ -35,7 +35,8 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v1
         with:
-          path: build/${{ env.targetPlatform }}/${{ inputs.projectName }}
+          name: ${{ inputs.projectName }}${{ env.targetPlatform }}GithubPages
+          path: build/${{ env.targetPlatform }}
 
       - name: Deploy Pages
         id: deployment
