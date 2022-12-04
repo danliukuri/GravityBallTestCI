@@ -11,13 +11,19 @@ jobs:
     name: Test
     uses: ./.github/workflows/test.yml
     secrets: inherit
+    with:
+      PROJECT_PATH: "./"
   build:
     name: Build
     needs: test
     uses: ./.github/workflows/build.yml
     secrets: inherit
+    with:
+      PROJECT_NAME: "GravityBall"
   deploy:
     name: Deploy
     needs: build
     uses: ./.github/workflows/deploy.yml
     secrets: inherit
+    with:
+      PROJECT_NAME: "GravityBall"

@@ -1,6 +1,11 @@
 name: Deploy
 
-on: workflow_call
+on: 
+  workflow_call:
+    inputs:
+      PROJECT_NAME:
+        required: true
+        type: string
 
 jobs:
   deploy-github-pages:
@@ -23,7 +28,7 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v1
         with:
-          path: build/WebGL/${{ env.PROJECT_NAME }}
+          path: build/WebGL/${{ inputs.PROJECT_NAME }}
 
       - name: Deploy Pages
         id: deployment
