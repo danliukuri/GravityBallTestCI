@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------------------
-# CI pipeline for creating a 'Manual Activation File' for Unity.
+# CI pipeline for creating a 'Manual License Activation File' for Unity.
 #
 # Currently the only way to activate a 'free' license of Unity while running headless is to
 # create a 'Manual Activation File' and the manually activate that through a website.
@@ -18,7 +18,7 @@ jobs:
     name: Get manual activation file
     runs-on: ubuntu-latest
     environment:
-      name: Link to activate Unity license
+      name: Develop
       url: https://license.unity3d.com/manual
     
     steps:
