@@ -7,17 +7,17 @@ on:
         required: true
         type: string
 
-env:
-  targetPlatform: WebGL
+
 
 jobs:
   deploy-github-pages:
     name: Github Pages
     runs-on: ubuntu-latest
     environment:
-      name: ${{ inputs.projectName }}${{ env.targetPlatform }}GithubPages
+      name: ${{ inputs.projectName }}WebGLGithubPages
       url: ${{ steps.deployment.outputs.page_url }}
-    
+    env:
+      targetPlatform: WebGL
     permissions:
       pages: write
       id-token: write
