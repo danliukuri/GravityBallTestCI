@@ -35,9 +35,10 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v1
         with:
-          artifact_name: ${{ inputs.projectName }}${{ env.targetPlatform }}GithubPages
           path: build/${{ env.targetPlatform }}
 
       - name: Deploy Pages
         id: deployment
         uses: actions/deploy-pages@v1
+        with:
+          artifact_name: ${{ inputs.projectName }}${{ env.targetPlatform }}GithubPages
