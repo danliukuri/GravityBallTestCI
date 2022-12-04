@@ -7,19 +7,20 @@ on:
         required: true
         type: string
 
+env:
+  targetPlatform: WebGL
+
 jobs:
   deploy-github-pages:
     name: Github Pages
     runs-on: ubuntu-latest
     environment:
-      name: github-pages
+      name: ${{ inputs.projectName }}${{ env.targetPlatform }}GithubPages
       url: ${{ steps.deployment.outputs.page_url }}
-    env:
-      targetPlatform: WebGL
     permissions:
       pages: write
       id-token: write
-
+      
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
