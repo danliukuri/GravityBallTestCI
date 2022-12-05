@@ -59,7 +59,7 @@ jobs:
           testMode: ${{ matrix.testMode }}
           artifactsPath: tests/${{ matrix.testMode }}/artifacts
           githubToken: ${{ secrets.GITHUB_TOKEN }}
-          checkName: TestResults${{ matrix.testMode }}
+          checkName: Test Results ${{ matrix.testMode }}
           coverageOptions: 'generateAdditionalMetrics;generateHtmlReport;generateBadgeReport;assemblyFilters:+game.assembly.*'
 
       - name: Upload test results
