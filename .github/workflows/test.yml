@@ -4,7 +4,8 @@ on:
   workflow_call:
     inputs:
       projectPath:
-        required: true
+        required: false
+        default: ./
         type: string
 
 jobs:

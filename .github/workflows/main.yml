@@ -7,8 +7,6 @@ jobs:
     name: Test
     uses: ./.github/workflows/test.yml
     secrets: inherit
-    with:
-      projectPath: "./"
   build:
     name: Build
     needs: test
