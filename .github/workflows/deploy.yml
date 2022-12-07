@@ -36,7 +36,8 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           path: build/${{ env.targetPlatform }}
-          # "name" isn't implemented yet, see https://github.com/actions/upload-pages-artifact/issues/30
+          # "name" isn't implemented yet, see https://github.com/actions/upload-pages-artifact/issues/30 
+          # and upvote my pull request https://github.com/actions/upload-pages-artifact/pull/41
           # name: ${{ inputs.projectName }}${{ env.targetPlatform }}GithubPages 
 
       - name: Deploy Pages
