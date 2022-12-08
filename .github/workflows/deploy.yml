@@ -4,6 +4,11 @@ on:
   workflow_call:
     inputs:
       projectName:
+        description: Name of the project
+        required: true
+        type: string
+      environment:
+        description: Name of environment for deployment
         required: true
         type: string
 
@@ -12,8 +17,8 @@ jobs:
     name: Github Pages
     runs-on: ubuntu-latest
     environment:
-      name: Develop
-      url: ${{ steps.deployment.outputs.page_url }}
+      name: ${{ inputs.environment }}
+      url: ${{ steps.deployment.outputs.page_url }}${{ inputs.environment }}
     env:
       targetPlatform: WebGL
     permissions:
