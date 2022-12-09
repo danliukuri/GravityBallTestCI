@@ -17,7 +17,10 @@ jobs:
   get-unity-license-activation-file:
     name: Get Manual Activation File
     runs-on: ubuntu-latest
-    
+    environment:
+      name: Develop
+      url: https://license.unity3d.com/manual
+
     steps:
       - name: Request manual activation file
         id: getManualLicenseFile
