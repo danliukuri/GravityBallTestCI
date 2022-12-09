@@ -6,6 +6,10 @@ on:
       projectName:
         required: true
         type: string
+      projectPath:
+        required: false
+        default: ./
+        type: string
 
 jobs:
   build-all-target-platforms:
@@ -48,7 +52,7 @@ jobs:
       - name: Restore library cache
         uses: actions/cache@v3
         with:
-          path: Library
+          path: ${{ inputs.projectPath }}/Library
           key: Library-Build-${{ matrix.targetPlatform }}
           restore-keys: |
             Library-Build-
