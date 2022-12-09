@@ -51,7 +51,7 @@ jobs:
             Library-
 
       - name: Test
-        uses: game-ci/unity-test-runner@v2.1.0
+        uses: game-ci/unity-test-runner@v2.1.1
         id: tests
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
@@ -61,7 +61,6 @@ jobs:
           artifactsPath: tests/${{ matrix.testMode }}/artifacts
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           checkName: Test Results ${{ matrix.testMode }}
-          coverageOptions: 'generateAdditionalMetrics;generateHtmlReport;generateBadgeReport;assemblyFilters:+game.assembly.*'
 
       - name: Upload test results
         uses: actions/upload-artifact@v3
@@ -69,10 +68,3 @@ jobs:
         with:
           name: TestResults${{ matrix.testMode }} 
           path: ${{ steps.tests.outputs.artifactsPath }}
-
-      - name: Upload coverage results
-        uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: CoverageResults${{ matrix.testMode }} 
-          path: ${{ steps.tests.outputs.coveragePath }}
