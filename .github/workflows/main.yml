@@ -7,6 +7,7 @@ on:
       deployEnvironment:
           description: Environment for deployment
           type: environment
+
 jobs:
   test:
     name: Test

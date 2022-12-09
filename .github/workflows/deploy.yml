@@ -4,6 +4,7 @@ on:
   workflow_call:
     inputs:
       projectName:
+        description: Name of the project
         required: true
         type: string
       environment:
