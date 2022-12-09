@@ -8,7 +8,8 @@ on:
         type: string
       environment:
         description: Name of environment for deployment
-        required: true
+        required: false
+        default: Develop
         type: string
 
 jobs:
