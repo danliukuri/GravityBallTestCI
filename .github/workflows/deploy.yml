@@ -6,14 +6,18 @@ on:
       projectName:
         required: true
         type: string
+      environment:
+        description: Name of environment for deployment
+        required: true
+        type: string
 
 jobs:
   deploy-github-pages:
     name: Github Pages
     runs-on: ubuntu-latest
     environment:
-      name: Develop
-      url: ${{ steps.deployment.outputs.page_url }}
+      name: ${{ inputs.environment }}
+      url: ${{ steps.deployment.outputs.page_url }}${{ inputs.environment }}/
     env:
       targetPlatform: WebGL
     permissions:
@@ -37,7 +41,7 @@ jobs:
         uses: actions/upload-pages-artifact@v1.0.6
         with:
           path: build/${{ env.targetPlatform }}/${{ inputs.projectName }}
-          name: ${{ inputs.projectName }}${{ env.targetPlatform }}GithubPages 
+          name: ${{ inputs.projectName }}${{ env.targetPlatform }}GithubPages${{ inputs.environment }}
 
       - name: Deploy to github pages
         id: deployment

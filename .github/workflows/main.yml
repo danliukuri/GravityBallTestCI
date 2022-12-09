@@ -1,7 +1,14 @@
 name: Unity
 
-on: [pull_request, workflow_dispatch]
-
+on:
+  pull_request: {}
+  workflow_dispatch:
+    inputs:
+      deployEnvironment:
+          description: Environment for deployment
+          required: false
+          default: Develop
+          type: environment
 jobs:
   test:
     name: Test
@@ -21,3 +28,4 @@ jobs:
     secrets: inherit
     with:
       projectName: "GravityBall"
+      environment: ${{ inputs.deployEnvironment }}
