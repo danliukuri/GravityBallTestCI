@@ -49,4 +49,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v1.2.3
         with:
-          artifact_name: ${{ inputs.projectName }}${{ env.targetPlatform }}GithubPages
+          artifact_name: ${{ inputs.projectName }}${{ env.targetPlatform }}GithubPages${{ inputs.environment }}
