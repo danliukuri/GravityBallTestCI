@@ -34,6 +34,9 @@ jobs:
         with:
           path: .git/lfs
           key: ${{ runner.os }}-Lfs-${{ hashFiles('.lfs-assets-id') }}
+          restore-keys: |
+            ${{ runner.os }}-Lfs-
+            ${{ runner.os }}-
 
       - name: Git LFS pull
         run: |
@@ -47,7 +50,6 @@ jobs:
           path: ${{ inputs.projectPath }}/Library
           key: Library-Test
           restore-keys: |
-            Library-Build-
             Library-
 
       - name: Test
