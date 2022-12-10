@@ -1,3 +1,8 @@
+# Cache reusing
+# Workflow runs can restore caches created in either the current branch or the default branch
+# More cache restrictions:
+#   * https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#restrictions-for-accessing-a-cache
+
 name: Test
 
 on: 
