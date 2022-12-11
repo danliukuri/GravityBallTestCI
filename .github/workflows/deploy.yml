@@ -37,6 +37,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1.0.6
         with:
+          # ${{ inputs.projectName }} in "path" input is needed because of build name
+          # Check "buildName" input of "game-ci/unity-builder" action
           path: build/${{ env.targetPlatform }}/${{ inputs.projectName }}
           name: ${{ inputs.projectName }}${{ env.targetPlatform }}GithubPages 
 
